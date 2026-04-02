@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Mookse Zeilweek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased h-screen flex flex-col">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-sailboat text-blue-600 text-2xl"></i>
+                <a href="index.html" class="text-2xl font-bold text-blue-900">Mookse Zeilweek</a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-slate-600 hover:text-blue-600">Home</a>
+                <a href="inschrijven.html" class="text-slate-600 hover:text-blue-600">Aanmelden</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center px-4">
+        <div class="bg-white rounded-lg shadow-md p-8 border border-slate-100 max-w-md w-full">
+            <div class="text-center mb-6">
+                <i class="fa-solid fa-lock text-3xl text-blue-600 mb-2"></i>
+                <h2 class="text-2xl font-bold text-blue-900">Beheerders Login</h2>
+                <p class="text-slate-600 text-sm">Voer het wachtwoord in om door te gaan.</p>
+            </div>
+            
+            <form id="loginForm" class="space-y-4">
+                <div id="foutmelding" class="hidden bg-red-100 text-red-700 p-3 rounded text-sm font-semibold">
+                    Onjuist wachtwoord!
+                </div>
+
+                <div>
+                    <input type="password" id="wachtwoord" required placeholder="Wachtwoord" class="w-full border rounded p-3 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 transition">
+                    Inloggen
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const ingevoerd = document.getElementById('wachtwoord').value;
+            
+            // Controleer het wachtwoord
+            if (ingevoerd === 'alcoholopfiets') {
+                // Sla op in localStorage dat we ingelogd zijn
+                localStorage.setItem('admin_ingelogd', 'true');
+                // Stuur door naar admin.html
+                window.location.href = 'admin.html';
+            } else {
+                // Toon foutmelding
+                document.getElementById('foutmelding').classList.remove('hidden');
+                document.getElementById('wachtwoord').value = '';
+            }
+        });
+    </script>
+</body>
+</html>

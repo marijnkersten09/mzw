@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aanmelden - Mookse Zeilweek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <i class="fa-solid fa-sailboat text-blue-600 text-2xl"></i>
+                <a href="index.html" class="text-2xl font-bold text-blue-900">Mookse Zeilweek</a>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html" class="text-slate-600 hover:text-blue-600">Home</a>
+                <a href="inschrijven.html" class="text-blue-600 font-semibold">Aanmelden</a>
+                <a href="login.html" class="text-slate-600 hover:text-blue-600">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-4 py-12">
+        <div class="bg-white rounded-lg shadow-md p-8 border border-slate-100">
+            <h2 class="text-3xl font-bold text-blue-900 mb-2">Aanmelden Zeilweek</h2>
+            <p class="text-slate-600 mb-8">Kies het juiste programma en vul je gegevens in.</p>
+            
+            <form id="inschrijfForm" class="space-y-6">
+                
+                <div class="bg-slate-50 p-4 rounded border border-slate-200 mb-6">
+                    <label class="block text-lg font-bold text-blue-900 mb-3">Welk programma kies je? *</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="programma" value="Junior" required class="w-4 h-4 text-blue-600">
+                            <span>**Junior (7 - 11 jaar)** - 5 dagdelen (€75,-)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="radio" name="programma" value="Regulier" class="w-4 h-4 text-blue-600">
+                            <span>**Regulier (Vanaf 11 jaar)** - Hele week (€135,-)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Voornaam *</label>
+                        <input type="text" id="voornaam" required class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Achternaam *</label>
+                        <input type="text" id="achternaam" required class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Leeftijd *</label>
+                        <input type="number" id="leeftijd" min="7" required class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-600" placeholder="Minimaal 7 jaar">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">E-mailadres Ouder/Verzorger *</label>
+                        <input type="email" required class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                    </div>
+                </div>
+
+                <hr class="border-slate-200">
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Bij Junior: Voorkeur dagdeel</label>
+                        <select id="voorkeur_junior" class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <option value="">N.v.t. (Regulier gekozen of geen voorkeur)</option>
+                            <option value="Ochtend">Ochtend (09:00 - 12:00)</option>
+                            <option value="Middag">Middag (14:00 - 17:00)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Bij Regulier: Welke jaarlaag?</label>
+                        <select id="voorkeur_regulier" class="w-full border rounded p-2 focus:outline-none focus:ring-2 focus:ring-blue-600">
+                            <option value="">N.v.t. (Junior gekozen)</option>
+                            <option value="Jaar 1">Jaar 1 (Geen ervaring)</option>
+                            <option value="Jaar 2">Jaar 2 (Beetje ervaring)</option>
+                            <option value="Jaar 3">Jaar 3 (Redelijk ervaren)</option>
+                            <option value="Jaar 4">Jaar 4 (Gevorderd)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 transition mt-4">Verstuur Aanmelding</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        document.getElementById('inschrijfForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Formuliervelden ophalen
+            const geselecteerdProgramma = document.querySelector('input[name="programma"]:checked').value;
+            const details = document.getElementById('voorkeur_junior').value || document.getElementById('voorkeur_regulier').value || "-";
+
+            // Gegevens object maken
+            const nieuweAanmelding = {
+                id: "#" + Math.floor(1000 + Math.random() * 9000), // Genereer willekeurig ID
+                voornaam: document.getElementById('voornaam').value,
+                achternaam: document.getElementById('achternaam').value,
+                leeftijd: document.getElementById('leeftijd').value,
+                programma: geselecteerdProgramma,
+                details: details,
+                status: "Nieuw"
+            };
+
+            // Opslaan in LocalStorage
+            let aanmeldingen = JSON.parse(localStorage.getItem('zeilweek_aanmeldingen')) || [];
+            aanmeldingen.push(nieuweAanmelding);
+            localStorage.setItem('zeilweek_aanmeldingen', JSON.stringify(aanmeldingen));
+
+            // Succesmelding tonen en formulier wissen
+            alert("Bedankt voor de aanmelding! Je bent succesvol ingeschreven.");
+            this.reset();
+        });
+    </script>
+</body>
+</html>
